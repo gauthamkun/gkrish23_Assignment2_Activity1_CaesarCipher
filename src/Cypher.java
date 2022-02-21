@@ -22,7 +22,22 @@ public class Cypher {
     }
 
     public static String decrypt(String cipherT, int shift) {
+        final String alph = "abcdefghijklmnopqrstuvwxyz";
+        cipherT = cipherT.toLowerCase();
 
+        String plainT = "";
+
+        for (int i = 0; i < cipherT.length(); i++) {
+            int mappingV = alph.indexOf(cipherT.charAt(i));
+            int deVal = (mappingV - shift) % 26;
+            if (deVal < 0)
+            {
+                deVal = alph.length() + deVal;
+            }
+            char Val = alph.charAt(deVal);
+            plainT = plainT + Val;
+        }
+        return plainT;
     }
 
 
