@@ -2,50 +2,80 @@ import java.util.Scanner;
 
 
 public class Cypher {
-    private static final char LETTER_A = 'a';
-    private static final char LETTER_Z = 'z';
-    private static final int ALPHABET_SIZE = 26;
 
 
-    public String cipher(String message, int offset) {
-        offset %= ALPHABET_SIZE;
-        char[] character = message.toCharArray();
-        offsetBy(character, offset);
-        return new String(character);
+    public static String cipher(String plainT, int shift) {
+        final String alph = "abcdefghijklmnopqrstuvwxyz";
+        plainT = plainT.toLowerCase();
+
+        String cipherT = "";
+
+        for (int i = 0; i < plainT.length(); i++) {
+            int mappingV = alph.indexOf(plainT.charAt(i));
+
+            int enVal = (shift + mappingV) % 26;
+            char Val = alph.charAt(enVal);
+            cipherT = cipherT + Val;
+        }
+        return cipherT;
+
     }
 
-    public void offsetBy(char[] character, int offset) {
-        for (int i = 0; i < character.length; ++i) {
-            if (character[i] != ' ') {
-                character[i] = offsetChar(character[i], offset, LETTER_A, LETTER_Z);
-            }
-        }
+    public static String decrypt(String cipherT, int shift) {
+
     }
 
-    public static char offsetChar(char c, int offset, char letterA, char letterZ) {
-        c += offset;
-        if (c < letterA) {
-            return (char) (c + ALPHABET_SIZE);
-        }
-        if (c > letterZ) {
-            return (char) (c - ALPHABET_SIZE);
-        }
-        return c;
-    }
+
     public static void main(String[] args) {
 
-
-
-        System.out.println("Message:");
-        Scanner scan = new Scanner(System.in);
-        String message = scan.nextLine();
-        int offset = ciphervalue(message);
-
+        Scanner sc = new Scanner(System.in);
+        String cipheredMessage = null;
+        boolean isrunning = true;
+        String X = null;
+        int offset = 0;
         Cypher caesarsCipher = new Cypher();
-        String cipheredMessage = caesarsCipher.cipher(message, offset);
-        System.out.println("Message: " + message);
-        System.out.println("Offset: " + offset);
-        System.out.println("Ciphered message: " + cipheredMessage);
-    }
+        System.out.println("qqq");
 
+        do{
+        System.out.println("Choose 1) Enter Message 2)Encrypt 3)decrypt 4)Exit");
+        int Choice = sc.nextInt();
+        switch (Choice) {
+            case 1:
+            {
+                System.out.println("Message:");
+                Scanner scan = new Scanner(System.in);
+                X = scan.nextLine();
+                offset = ciphervalue(X);
+                System.out.println("Offset Value:"+offset);
+                break;
+            }
+            case 2: {
+                cipheredMessage = String.valueOf(caesarsCipher.cipher(X, offset));
+                System.out.println("Ciphered message: " + cipheredMessage);
+                break;
+            } case 3: {
+                String Decrypt = String.valueOf(caesarsCipher.decrypt(cipheredMessage, offset));
+                System.out.println("Offset Value:"+ offset);
+                System.out.println("DE message: " + Decrypt);
+                break;
+            } case 4:{
+                System.out.println("Thank you, goodbye!");
+                isrunning = false;
+                break;
+            }
+        }
+    }while(isrunning);}
+
+    public static int ciphervalue(String Message){
+
+        int sum=0;
+        for(int i=0; i<Message.length(); i++)
+        {
+            int asciiValue = Message.charAt(i);
+            sum = sum+ asciiValue;
+
+        }
+
+        return sum;
+    }
 }
