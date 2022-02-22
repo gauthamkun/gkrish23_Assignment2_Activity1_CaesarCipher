@@ -4,40 +4,40 @@ import java.util.Scanner;
 public class Cypher {
 
 
-    public static String cipher(String plainT, int shift) {
+    public static String cipher(String text, int shift) {
         final String alph = "abcdefghijklmnopqrstuvwxyz";
-        plainT = plainT.toLowerCase();
+        text = text.toLowerCase();
 
-        String cipherT = "";
+        String cipher = "";
 
-        for (int i = 0; i < plainT.length(); i++) {
-            int mappingV = alph.indexOf(plainT.charAt(i));
+        for (int i = 0; i < text.length(); i++) {
+            int mappingV = alph.indexOf(text.charAt(i));
 
             int enVal = (shift + mappingV) % 26;
             char Val = alph.charAt(enVal);
-            cipherT = cipherT + Val;
+            cipher = cipher + Val;
         }
-        return cipherT;
+        return cipher;
 
     }
 
-    public static String decrypt(String cipherT, int shift) {
+    public static String decrypt(String cipherText, int shift) {
         final String alph = "abcdefghijklmnopqrstuvwxyz";
-        cipherT = cipherT.toLowerCase();
+        cipherText = cipherText.toLowerCase();
 
-        String plainT = "";
+        String plain = "";
 
-        for (int i = 0; i < cipherT.length(); i++) {
-            int mappingV = alph.indexOf(cipherT.charAt(i));
-            int deVal = (mappingV - shift) % 26;
-            if (deVal < 0)
+        for (int i = 0; i < cipherText.length(); i++) {
+            int map = alph.indexOf(cipherText.charAt(i));
+            int Vals = (map - shift) % 26;
+            if (Vals < 0)
             {
-                deVal = alph.length() + deVal;
+                Vals = alph.length() + Vals;
             }
-            char Val = alph.charAt(deVal);
-            plainT = plainT + Val;
+            char Val = alph.charAt(Vals);
+            plain = plain + Val;
         }
-        return plainT;
+        return plain;
     }
 
 
@@ -49,7 +49,7 @@ public class Cypher {
         String X = null;
         int offset = 0;
         Cypher caesarsCipher = new Cypher();
-        System.out.println("qqq");
+
 
         do{
         System.out.println("Choose 1) Enter Message 2)Encrypt 3)decrypt 4)Exit");
